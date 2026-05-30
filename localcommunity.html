@@ -1,193 +1,324 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Local Community Event Portal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Community Event Portal</title>
 
-    <!-- Internal CSS -->
-    <style>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+    background:#f4f4f4;
+}
 
-        /* Universal Selector */
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
+nav{
+    background:#007BFF;
+    padding:10px;
+}
 
-        /* Body Styling */
-        body{
-            background:#f4f4f4 url("bg.jpg");
-            font-family:Arial,sans-serif;
-            padding:20px;
-        }
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:15px;
+}
 
-        /* ID Selector */
-        #mainHeader{
-            background:linear-gradient(to right,#007BFF,#00C853);
-            color:white;
-            text-align:center;
-            padding:20px;
-        }
+#welcomeBanner{
+    background:blue;
+    color:white;
+    padding:15px;
+    margin-top:10px;
+}
 
-        /* Element Selector */
-        h2{
-            color:#007BFF;
-            margin-top:20px;
-        }
+.highlight{
+    background:yellow;
+    font-weight:bold;
+}
 
-        /* Class Selector */
-        .eventCard{
-            background:rgba(255,255,255,0.9);
-            border:2px solid #007BFF;
-            padding:15px;
-            margin:15px 0;
-        }
+.event-img{
+    width:150px;
+    height:100px;
+    border:3px solid black;
+}
 
-        /* Group Selector */
-        h3,p{
-            margin:10px;
-        }
+form{
+    background:white;
+    padding:15px;
+    border:1px solid gray;
+}
 
-        /* Link Styling */
-        a:link{
-            color:blue;
-        }
+video{
+    width:400px;
+}
+</style>
 
-        a:hover{
-            color:red;
-        }
+<script>
 
-        a:active{
-            color:green;
-        }
+function validatePhone(){
+    let phone=document.getElementById("phone").value;
+    if(phone.length!=10){
+        alert("Enter valid 10 digit phone number");
+    }
+}
 
-        a:visited{
-            color:purple;
-        }
+function showFee(){
+    let event=document.getElementById("eventType").value;
+    let fee=document.getElementById("fee");
 
-        /* List Styling */
-        ul{
-            list-style:none;
-        }
+    if(event=="Music")
+        fee.innerHTML="Fee : ₹100";
+    else if(event=="Sports")
+        fee.innerHTML="Fee : ₹200";
+    else if(event=="Food")
+        fee.innerHTML="Fee : ₹150";
+}
 
-        li{
-            padding:5px;
-            margin:5px;
-        }
+function submitForm(){
+    document.getElementById("output").innerHTML=
+    "Registration Submitted Successfully!";
+}
 
-        /* Table Styling */
-        table{
-            width:100%;
-            border-collapse:collapse;
-            text-align:center;
-        }
+function enlarge(img){
+    img.style.width="300px";
+    img.style.height="200px";
+}
 
-        th,td{
-            border:1px solid black;
-            padding:10px;
-        }
+function countChars(){
+    let len=document.getElementById("feedback").value.length;
+    document.getElementById("count").innerHTML=
+    "Characters : "+len;
+}
 
-        th{
-            background:#007BFF;
-            color:white;
-        }
+function videoReady(){
+    document.getElementById("videoMsg").innerHTML=
+    "Video Ready To Play";
+}
 
-        tr:nth-child(even){
-            background:#dddddd;
-        }
+function savePreference(){
+    let event=document.getElementById("eventType").value;
+    localStorage.setItem("preferredEvent",event);
+}
 
-        /* Multi Column Layout */
-        .news{
-            column-count:2;
-            column-gap:30px;
-            column-rule:1px solid gray;
-            margin-top:20px;
-        }
+function loadPreference(){
+    let event=localStorage.getItem("preferredEvent");
+    if(event){
+        document.getElementById("eventType").value=event;
+    }
+}
 
-        /* Form Outline */
-        input:focus{
-            outline:2px solid red;
-        }
+function clearStorage(){
+    localStorage.clear();
+    sessionStorage.clear();
+    alert("Preferences Cleared");
+}
 
-        /* Responsive Design */
-        @media screen and (max-width:768px){
+function findLocation(){
 
-            body{
-                font-size:14px;
-            }
+    if(navigator.geolocation){
 
-            ul{
-                display:block;
-            }
+        navigator.geolocation.getCurrentPosition(
 
-            img{
-                width:100%;
-            }
-        }
+        function(position){
+            document.getElementById("location").innerHTML=
+            "Latitude : "+position.coords.latitude+
+            "<br>Longitude : "+position.coords.longitude;
+        },
 
-    </style>
+        function(error){
+            alert("Location Access Denied");
+        },
+
+        {
+            enableHighAccuracy:true,
+            timeout:5000
+        });
+
+    }else{
+        alert("Geolocation Not Supported");
+    }
+}
+
+window.onload=loadPreference;
+
+window.onbeforeunload=function(){
+    return "Are you sure you want to leave?";
+};
+
+</script>
+
 </head>
 
 <body>
 
-    <!-- Inline CSS -->
-    <h1 style="color:red;">Local Community Event Portal</h1>
+<!-- Navigation -->
+<nav>
+<a href="#home">Home</a>
+<a href="#events">Events</a>
+<a href="#contact">Contact</a>
+<a href="help.html" target="_blank">Help</a>
+</nav>
 
-    <div id="mainHeader">
-        <h2>Community Events</h2>
-    </div>
+<!-- Welcome Banner -->
+<div id="welcomeBanner">
+<h2>Welcome User</h2>
+<p>
+Special Offer :
+<span style="color:red;font-weight:bold;">
+50% Discount
+</span>
+</p>
+</div>
 
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Events</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
+<h3 class="highlight">Upcoming Community Events</h3>
 
-    <div class="eventCard">
-        <h3>Music Festival</h3>
-        <p>Enjoy live music and entertainment.</p>
-    </div>
+<!-- Events Section -->
+<section id="events">
 
-    <div class="eventCard">
-        <h3>Food Fair</h3>
-        <p>Explore delicious foods from local vendors.</p>
-    </div>
+<h2>Image Gallery</h2>
 
-    <h2>Event Schedule</h2>
+<table border="1">
+<tr>
+<td>
+<img src="https://via.placeholder.com/150"
+class="event-img"
+alt="Event1"
+title="Music Event"
+ondblclick="enlarge(this)">
+<br>Music Event
+</td>
 
-    <table>
-        <tr>
-            <th>Event</th>
-            <th>Date</th>
-            <th>Venue</th>
-        </tr>
+<td>
+<img src="https://via.placeholder.com/150"
+class="event-img"
+alt="Event2"
+title="Sports Event"
+ondblclick="enlarge(this)">
+<br>Sports Event
+</td>
 
-        <tr>
-            <td>Music Festival</td>
-            <td>10 June</td>
-            <td>City Park</td>
-        </tr>
+<td>
+<img src="https://via.placeholder.com/150"
+class="event-img"
+alt="Event3"
+title="Food Event"
+ondblclick="enlarge(this)">
+<br>Food Festival
+</td>
+</tr>
 
-        <tr>
-            <td>Food Fair</td>
-            <td>15 June</td>
-            <td>Community Hall</td>
-        </tr>
-    </table>
+<tr>
+<td>
+<img src="https://via.placeholder.com/150"
+class="event-img">
+<br>Dance Show
+</td>
 
-    <h2>Community News</h2>
+<td>
+<img src="https://via.placeholder.com/150"
+class="event-img">
+<br>Book Fair
+</td>
 
-    <div class="news">
-        Community members are invited to participate in upcoming social activities.
-        The city council is organizing awareness programs, cultural events,
-        sports competitions and environmental campaigns for public welfare.
-    </div>
+<td>
+<img src="https://via.placeholder.com/150"
+class="event-img">
+<br>Art Expo
+</td>
+</tr>
+</table>
 
-    <br><br>
+</section>
 
-    <form>
-        Name:
-        <input type="text">
-    </form>
+<hr>
+
+<h2>Event Registration Form</h2>
+
+<form>
+
+Name:
+<input type="text"
+placeholder="Enter Name"
+required autofocus>
+<br><br>
+
+Email:
+<input type="email"
+placeholder="Enter Email"
+required>
+<br><br>
+
+Phone:
+<input type="text"
+id="phone"
+onblur="validatePhone()">
+<br><br>
+
+Date:
+<input type="date" required>
+<br><br>
+
+Event Type:
+<select id="eventType"
+onchange="showFee();savePreference();">
+
+<option>Music</option>
+<option>Sports</option>
+<option>Food</option>
+
+</select>
+
+<p id="fee"></p>
+
+Message:
+<br>
+<textarea rows="5"
+cols="30"
+id="feedback"
+onkeyup="countChars()"></textarea>
+
+<p id="count">Characters : 0</p>
+
+<br>
+
+<input type="button"
+value="Submit"
+onclick="submitForm()">
+
+</form>
+
+<output id="output"></output>
+
+<hr>
+
+<h2>Video Invitation</h2>
+
+<video controls oncanplay="videoReady()">
+<source src="sample.mp4" type="video/mp4">
+</video>
+
+<p id="videoMsg"></p>
+
+<hr>
+
+<h2>Geolocation</h2>
+
+<button onclick="findLocation()">
+Find Nearby Events
+</button>
+
+<p id="location"></p>
+
+<hr>
+
+<button onclick="clearStorage()">
+Clear Preferences
+</button>
+
+<!-- Footer -->
+<footer id="contact">
+<h3>Contact Us</h3>
+<p>Email: community@gmail.com</p>
+</footer>
 
 </body>
 </html>
