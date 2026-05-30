@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Community Event Portal</title>
+
+    <!-- Internal CSS -->
+    <style>
+
+        /* Universal Selector */
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        /* Body Styling */
+        body{
+            background:#f4f4f4 url("bg.jpg");
+            font-family:Arial,sans-serif;
+            padding:20px;
+        }
+
+        /* ID Selector */
+        #mainHeader{
+            background:linear-gradient(to right,#007BFF,#00C853);
+            color:white;
+            text-align:center;
+            padding:20px;
+        }
+
+        /* Element Selector */
+        h2{
+            color:#007BFF;
+            margin-top:20px;
+        }
+
+        /* Class Selector */
+        .eventCard{
+            background:rgba(255,255,255,0.9);
+            border:2px solid #007BFF;
+            padding:15px;
+            margin:15px 0;
+        }
+
+        /* Group Selector */
+        h3,p{
+            margin:10px;
+        }
+
+        /* Link Styling */
+        a:link{
+            color:blue;
+        }
+
+        a:hover{
+            color:red;
+        }
+
+        a:active{
+            color:green;
+        }
+
+        a:visited{
+            color:purple;
+        }
+
+        /* List Styling */
+        ul{
+            list-style:none;
+        }
+
+        li{
+            padding:5px;
+            margin:5px;
+        }
+
+        /* Table Styling */
+        table{
+            width:100%;
+            border-collapse:collapse;
+            text-align:center;
+        }
+
+        th,td{
+            border:1px solid black;
+            padding:10px;
+        }
+
+        th{
+            background:#007BFF;
+            color:white;
+        }
+
+        tr:nth-child(even){
+            background:#dddddd;
+        }
+
+        /* Multi Column Layout */
+        .news{
+            column-count:2;
+            column-gap:30px;
+            column-rule:1px solid gray;
+            margin-top:20px;
+        }
+
+        /* Form Outline */
+        input:focus{
+            outline:2px solid red;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width:768px){
+
+            body{
+                font-size:14px;
+            }
+
+            ul{
+                display:block;
+            }
+
+            img{
+                width:100%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Inline CSS -->
+    <h1 style="color:red;">Local Community Event Portal</h1>
+
+    <div id="mainHeader">
+        <h2>Community Events</h2>
+    </div>
+
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+
+    <div class="eventCard">
+        <h3>Music Festival</h3>
+        <p>Enjoy live music and entertainment.</p>
+    </div>
+
+    <div class="eventCard">
+        <h3>Food Fair</h3>
+        <p>Explore delicious foods from local vendors.</p>
+    </div>
+
+    <h2>Event Schedule</h2>
+
+    <table>
+        <tr>
+            <th>Event</th>
+            <th>Date</th>
+            <th>Venue</th>
+        </tr>
+
+        <tr>
+            <td>Music Festival</td>
+            <td>10 June</td>
+            <td>City Park</td>
+        </tr>
+
+        <tr>
+            <td>Food Fair</td>
+            <td>15 June</td>
+            <td>Community Hall</td>
+        </tr>
+    </table>
+
+    <h2>Community News</h2>
+
+    <div class="news">
+        Community members are invited to participate in upcoming social activities.
+        The city council is organizing awareness programs, cultural events,
+        sports competitions and environmental campaigns for public welfare.
+    </div>
+
+    <br><br>
+
+    <form>
+        Name:
+        <input type="text">
+    </form>
+
+</body>
+</html>
